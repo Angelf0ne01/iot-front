@@ -1,5 +1,5 @@
 import React, { ReactNode, PropsWithChildren, FunctionComponent, ReactElement } from 'react'
-import { ApiResponse, auth, AuthProps, User } from '../api'
+import { ApiResponse, auth, AuthProps, User } from '../../../api'
 import Cookie from 'js-cookie'
 import { useRouter } from 'next/router'
 

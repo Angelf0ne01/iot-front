@@ -3,9 +3,7 @@ import { useForm } from 'react-hook-form'
 import { TextField, Button, Grid } from '@mui/material'
 import { auth, AuthProps } from './../api'
 import { useRouter } from 'next/router'
-import { useAuth } from '../context'
-import { useSnackbar } from '../core/helpers'
-
+import { useSnackbar, useAuth } from '../core/helpers'
 import { ApiInstanceError } from './../core/clients/axios'
 import Image from "next/image"
 import LoginFormSvg from '../storybook/assets/img/login-form.svg'
