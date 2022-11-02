@@ -1,7 +1,8 @@
-import React, { ReactNode, PropsWithChildren, FunctionComponent, ReactElement } from 'react'
-import { ApiResponse, auth, AuthProps, User } from '../../../api'
+import React, { PropsWithChildren, FunctionComponent } from 'react'
+import { ApiResponse, auth, AuthProps } from '../../../api'
 import Cookie from 'js-cookie'
 import { useRouter } from 'next/router'
+import { User } from '../../../common/entities/user'
 
 export interface AuthProviderValue {
   login: (params: AuthProps) => Promise<ApiResponse<User>> | undefined
@@ -58,21 +59,27 @@ export const AuthContextProvider: FunctionComponent<AuthContextProviderProps> = 
 
 
 
-export function ProtectRouter(Component: ReactElement) {
-  return () => {
-    if (typeof window !== 'undefined') {
-      const hastToken = Cookie.get(TOKEN_KEY)
-      const router = useRouter()
+const AuthComponent: React.FunctionComponent<React.PropsWithChildren> = ({ children }) => {
+  const router = useRouter()
+  if (typeof window !== 'undefined') {
+    const hastToken = Cookie.get(TOKEN_KEY)
 
-      if (!hastToken) {
-        router.replace('/login')
-        return null
-      }
-
-      return <Component />
+    if (!hastToken) {
+      router.replace('/login')
+      return null
     }
-    return null
+
+    return <>{children}</>
+
   }
+  return null;
+}
+
+export function ProtectRouter(Component: any): any {
+
+  return <AuthComponent>
+    <Component />
+  </AuthComponent>
 }
 
 export function useAuth() {
