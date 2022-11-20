@@ -1,6 +1,6 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import Button from '@mui/material/Button'
-import { TextField } from "@mui/material";
+import { FormHelperText, TextField } from "@mui/material";
 
 type Inputs = {
     title: string,
@@ -11,7 +11,7 @@ interface Props {
 }
 
 export default function FormPage({ title }: Props) {
-    const { register, handleSubmit, watch, formState: { errors } } = useForm<Inputs>();
+    const { register, handleSubmit, formState: { errors } } = useForm<Inputs>();
     const onSubmit: SubmitHandler<Inputs> = data => console.log(data);
 
     return (
@@ -22,11 +22,12 @@ export default function FormPage({ title }: Props) {
 
                 <TextField defaultValue="test" {...register("title", { required: true })} />
                 <label>Titulo</label>
-                {errors.title && <span>El primer campo es requerido</span>}
+                <FormHelperText>{errors.title && <span>El primer campo es requerido</span>}</FormHelperText>
                 <TextField {...register("description", { required: true })} />
                 <label>descripción</label>
-                {errors.description && <span>El segundo campo es requerido</span>}
+                <FormHelperText>{errors.description && <span>El segundo campo es requerido</span>}</FormHelperText>
                 <Button type="submit">Guardar</Button>
+                
             </form>
         </>
     );
