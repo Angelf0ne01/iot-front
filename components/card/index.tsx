@@ -1,43 +1,62 @@
-import React from 'react'
-import styled from "@emotion/styled"
-import {AccountCircle} from '@mui/icons-material';
+import React from "react";
+import styled from "@emotion/styled";
+import { AccountCircle } from "@mui/icons-material";
 
 const Carta = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
   background-color: white;
-  color: black;
-  border-radius: 30px;
-  margin: 10px;
-  padding-top: 5px;
-  padding-left: 30px;
-  padding-right: 30px;
-  width: 270px;
-  height: 330px;
-  box-shadow: 0px 13px 20px rgba(0,0,0,0.7);
-`
+  border-radius: 10px;
+  padding: 20px;
+  width: 200px;
+  height: 200px;
+  border: 1px solid #ececec;
+  margin: 20px;
+  margin-left: 0px;
+
+  &:hover {
+    cursor: pointer;
+    border: 1px solid #15e7d2;
+    box-shadow: 0px 13px 20px rgba(210, 202, 202, 0.7);
+  }
+`;
 
 const Title = styled.h1`
-  border: 2px solid black;
-  padding: 10px;
+  margin: 0px;
   text-align: center;
-`
+  font-weight: 400;
+`;
+
+const Description = styled.span`
+  text-align: center;
+  font-weight: 300;
+  color: #c3c3c3;
+`;
 
 const Icon = styled.div`
   text-align: center;
-  margin-bottom: -18px;
-  margin-top: 5px;
-`
+`;
 
-interface Props{
-    title: string,
-    description: string,
+interface Props {
+  id: string;
+  title: string;
+  description: string;
+  onClick: (id: string) => void;
 }
 
-export default function Card({title,description} : Props){
-return(
-    <Carta>
-        <Icon><AccountCircle/></Icon>
-        <Title>{title}</Title>
-        <p>{description}</p>
+export default function Card({ title, description, id, onClick }: Props) {
+  const handleOnClick = () => {
+    onClick(id);
+  };
+  return (
+    <Carta onClick={handleOnClick}>
+      <Icon>
+        <AccountCircle />
+      </Icon>
+      <Title>{title}</Title>
+      <Description>{description}</Description>
     </Carta>
-)
+  );
 }
