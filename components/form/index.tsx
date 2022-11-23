@@ -96,7 +96,7 @@ export default function FormPage({ title }: Props) {
        
         <MyDiv>
             <form className="Form" onSubmit={handleSubmit(onSubmit)}>
-                <h2 className="Title">AGREGAR WORKER</h2>
+                <h2 className="Title">{title}</h2>
                 <div className="FormCont">
                     
                     <div className="FormG">
